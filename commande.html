@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> Mangez moi </title>
+    <!-- Bootstrap -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="dist/jquery.gridster.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <div class="navbar navbar-inverse" style="position: static;">
+              <div class="navbar-inner">
+                <div class="container">
+                  <a class="brand" href="index.html">Mangez-moi</a>
+                  <div class="nav-collapse navbar-inverse-collapse collapse" style="height: 0px;">
+                    <ul class="nav">
+                      <li><a href="index.html">Présentation</a></li>
+                      <li class="active"><a href="Commande.html">Commande</a></li>
+                      <li><a href="propos.html">A propos</a></li>
+                    </ul>
+                    <ul class="nav pull-right">
+                      <li><a href="#">Liens</a></li>
+                      <li class="divider-vertical"></li>
+                    </ul>
+                  </div><!-- /.nav-collapse -->
+                </div>
+              </div><!-- /navbar-inner -->
+            </div>
+    <!-- Structure page -->
+    <div class="container-fluid">
+       <div class="row-fluid">
+        <div class="span2">
+        <!-- Résumé de la commande -->
+        <h4> Résumé de votre commande </h4>
+        <p id="resume">Résumé à afficher ici</p>
+       
+        <button type="button" class="btn" data-toggle="button">Lancer commande</button>
+       
+      </div>
+    <!-- Partie centrale -->
+      <div class="span10">
+        <div class="span4 center"><h2>Cul</h2></div>
+        <div class="span4 center"><h2>Mousse</h2></div>
+        <div class="span4 center"><h2>Cafémoulte</h2></div>
+        <!-- Gridster -->
+        <section class="demo">
+
+        <div class="gridster">
+          <ul>
+
+            <li onclick="getElements()" nom-produit="Kebab" prix="5" data-row="1" data-col="2" data-sizex="1" data-sizey="1"><img src="http://rasamalaysia.com/images/chicken-kebab/kebab4.jpg" alt="" class="img-rounded img_grid"></li>
+            <li onclick="getElements()" nom-produit="Pita kebab" prix="6" data-row="2" data-col="2" data-sizex="1" data-sizey="1"> <img src="http://www.mrkebab.eu/images/fullsize/0103/pita-kebab.jpg" alt="" class="img-rounded img_grid"> </li>
+            <li onclick="getElements()" nom-produit="rien" prix="7" data-row="3" data-col="2" data-sizex="1" data-sizey="1"></li>
+            <li onclick="getElements()" nom-produit="Pizza" prix="8" data-row="4" data-col="2" data-sizex="1" data-sizey="1"><img src="http://www.pizzabareureka.com/files/wrapper_center.png" alt="" class="img-rounded img_grid"> </li>
+            <li onclick="getElements()" nom-produit="rien" prix="10" data-row="2" data-col="3" data-sizex="1" data-sizey="1"></li>
+            <li onclick="getElements()" nom-produit="rien" prix="11" data-row="3" data-col="3" data-sizex="1" data-sizey="1"></li>
+            <li onclick="getElements()" nom-produit="rien" prix="12" data-row="4" data-col="3" data-sizex="1" data-sizey="1"></li>
+
+            
+          </ul>
+        </div>
+    </section>
+      </div>
+       </div> 
+    </div>
+
+
+
+    <script type="text/javascript" src="libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="dist/jquery.gridster.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+
+<script>
+
+  function getElements() {
+    var gridster = $(".gridster ul").gridster().data('gridster');
+    var positions = gridster.serialize();
+    var colonne1 = new Array();
+    var p = positions.length;
+    for (var i = 0; i < p; i++)
+      if (positions[i].col == 1)
+        colonne1.push(positions[i]);
+
+  //alert($('li[data-col=1]').eq(2).attr("nom-produit"))
+    //alert($('li[data-col=1]').length);
+    var texte = "veuillez choisir un article";
+    var prixTotal = 0;
+    if($('li[data-col=1]'.length)!=0){
+      texte = "<table><tr><th>Produit<th/><th>Prix<th/><tr/>";
+      for (var i = 0;i < $('li[data-col=1]').length;i++){
+        texte += '<tr><td><strong>' + ($('li[data-col=1]').eq(i).attr("nom-produit")) + '</strong><td/><td>' + ($('li[data-col=1]').eq(i).attr("prix")) + ' € <td/><tr/>';
+        prixTotal += parseFloat($('li[data-col=1]').eq(i).attr("prix"));
+      }
+      texte += "</table><br/><strong> PrixTotal " + prixTotal + ' €</strong>';
+      $('#resume').html(texte);
+    }
+  };
+
+</script>
+
+
+
+
+
+
+
+
+
+ <script type="text/javascript">
+$(function(){ //DOM Ready
+
+    $(".gridster ul").gridster({
+        widget_margins: [10, 10],
+        widget_base_dimensions: [370, 200],
+    });
+
+});
+
+$(function(){ //DOM Ready
+
+   var gridster = $(".gridster ul").gridster().data('gridster');
+
+
+});
+
+
+</script>
+
+
+
+  </body>
+</html>
